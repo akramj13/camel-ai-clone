@@ -1,8 +1,14 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { motion, useAnimationControls, AnimatePresence } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+
+interface Logo {
+  src: string;
+  alt: string;
+  href: string | null;
+}
 
 function LogoCarousel() {
   // Store current positions to resume animation from
@@ -187,7 +193,64 @@ function LogoCarousel() {
     },
   };
 
-  const renderLogo = (logo: any, index: number) => {
+  // Animation functions
+  const startAnimation1 = useCallback(() => {
+    const endpoint = position1 <= -1000 ? 0 : -2000;
+    controls1.start({
+      x: [position1, endpoint],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 60 * (Math.abs(endpoint - position1) / 2000),
+          ease: "linear",
+        },
+      },
+    });
+  }, [position1, controls1]);
+
+  const startAnimation2 = useCallback(() => {
+    const endpoint = position2 >= -1000 ? -2000 : 0;
+    controls2.start({
+      x: [position2, endpoint],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 60 * (Math.abs(endpoint - position2) / 2000),
+          ease: "linear",
+        },
+      },
+    });
+  }, [position2, controls2]);
+
+  // Initialize animations and visibility observer
+  useEffect(() => {
+    const currentRef = containerRef.current;
+    startAnimation1();
+    startAnimation2();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [startAnimation1, startAnimation2]);
+
+  const renderLogo = (logo: Logo, index: number) => {
     const logoElement = (
       <motion.div
         className="mx-3 flex-shrink-0"
@@ -230,67 +293,6 @@ function LogoCarousel() {
       );
     }
     return logoElement;
-  };
-
-  // Initialize animations and visibility observer
-  useEffect(() => {
-    startAnimation1();
-    startAnimation2();
-
-    // Set up intersection observer to animate in when visible
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, []);
-
-  // Animation functions
-  const startAnimation1 = () => {
-    // Calculate the endpoint based on where we're starting
-    const endpoint = position1 <= -1000 ? 0 : -2000;
-
-    controls1.start({
-      x: [position1, endpoint],
-      transition: {
-        x: {
-          repeat: Infinity,
-          repeatType: "loop",
-          duration: 60 * (Math.abs(endpoint - position1) / 2000), // Scale duration based on distance
-          ease: "linear",
-        },
-      },
-    });
-  };
-
-  const startAnimation2 = () => {
-    // Calculate the endpoint based on where we're starting
-    const endpoint = position2 >= -1000 ? -2000 : 0;
-
-    controls2.start({
-      x: [position2, endpoint],
-      transition: {
-        x: {
-          repeat: Infinity,
-          repeatType: "loop",
-          duration: 60 * (Math.abs(endpoint - position2) / 2000), // Scale duration based on distance
-          ease: "linear",
-        },
-      },
-    });
   };
 
   // Handle hover effects

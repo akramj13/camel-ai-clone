@@ -40,7 +40,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
-  viewport: "width=device-width, initial-scale=1.0",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
 function APIJoin() {
@@ -72,6 +71,8 @@ function APIJoin() {
 
   // Intersection observer to trigger animations when in view
   useEffect(() => {
+    const currentRef = sectionRef.current;
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -81,13 +82,13 @@ function APIJoin() {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

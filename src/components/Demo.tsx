@@ -6,7 +6,6 @@ import {
   motion,
   useInView,
   useAnimation,
-  useScroll,
   AnimatePresence,
 } from "framer-motion";
 
@@ -22,10 +21,10 @@ function Demo() {
 
   // Use a single container ref to avoid conflicting scroll measurements
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ["start end", "end start"],
+  // });
 
   useEffect(() => {
     if (isInView1) {

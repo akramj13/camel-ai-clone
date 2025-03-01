@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -80,8 +79,8 @@ function FAQs() {
       question: "How is my data stored?",
       answer: (
         <>
-          camelAI's infrastructure is hosted on AWS. Data from applications is
-          pulled only when necessary and limited to what you request in your
+          camelAI&apos;s infrastructure is hosted on AWS. Data from applications
+          is pulled only when necessary and limited to what you request in your
           prompt. It is stored in an EC2 cache for 5 minutes and then deleted.
           For more information, please see our{" "}
           <Link
@@ -105,9 +104,9 @@ function FAQs() {
       question: "Do you train on my data?",
       answer: (
         <>
-          No, we do not train on your data. CamelAI is powered by OpenAI's API.
-          We have opted out of data sharing for training. You can read more
-          about OpenAI's API policies{" "}
+          No, we do not train on your data. CamelAI is powered by OpenAI&apos;s
+          API. We have opted out of data sharing for training. You can read more
+          about OpenAI&apos;s API policies{" "}
           <Link
             href="https://openai.com/enterprise-privacy/"
             className="text-blue-400 hover:text-blue-300"

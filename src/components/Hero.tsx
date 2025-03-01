@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavBar from "./NavBar";
 import VideoAnimator from "./VideoAnimator";
 import { motion } from "framer-motion";

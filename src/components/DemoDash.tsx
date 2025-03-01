@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 interface DemoDashProps {
   header: ReactNode;
   subheader: ReactNode;
   image: string;
-  imageAnimation?: any; // Animation variants for the image
+  imageAnimation?: Variants;
 }
 
 function DemoDash({ header, subheader, image, imageAnimation }: DemoDashProps) {
