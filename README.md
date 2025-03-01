@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# camelAI Clone
 
-## Getting Started
+This website is a clone of https://camelai.com/.
 
-First, run the development server:
+<div align="center">
+
+![Next.js](https://img.shields.io/badge/Next.js-15.2.0-black)
+![React](https://img.shields.io/badge/React-19.0.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38bdf8)
+
+</div>
+
+## ✨ Features
+
+- 🎨 **Responsive Design** - Built with Tailwind CSS to ensure a responsive and modern design
+- 🔄 **Interactive Components** - Utilizes Framer Motion for smooth animations and transitions
+- 📝 **TypeScript Support** - Developed with TypeScript for type safety and better developer experience
+- 🔍 **Code Quality** - Integrated ESLint for maintaining code quality and consistency
+
+## 🗂 Project Structure
+
+```
+src/
+├── components/         # Reusable React components
+│   ├── NavBar.tsx
+│   ├── Hero.tsx
+│   ├── DemoDash.tsx
+│   └── ...
+└── app/               # Main application logic and routing
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (version 14 or later)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/camel-ai-clone.git
+   cd camel-ai-clone
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+### Development
+
+Start the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build and start for production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+# or
+yarn build
+yarn start
+```
 
-## Learn More
+### Linting
 
-To learn more about Next.js, take a look at the following resources:
+Run the linter:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+# or
+yarn lint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Dependencies
 
-## Deploy on Vercel
+### Core Dependencies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `next`: ^15.2.0
+- `react`: ^19.0.0
+- `react-dom`: ^19.0.0
+- `framer-motion`: ^12.4.7
+- `tailwindcss`: ^4.0.0
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Development Dependencies
+
+- `typescript`: ^5.0.0
+- `eslint`: ^9.0.0
+- `@types/react`: ^19.0.0
+- `@types/react-dom`: ^19.0.0
+
+## 🤝 Contributing
+
+Contributions are always welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and commit them: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature-name`
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+Made with ❤️ by the Camel AI Clone team
+</div>
