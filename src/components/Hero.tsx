@@ -433,7 +433,7 @@ function Hero() {
                     }}
                   >
                     <motion.img
-                      className="w-[130px] h-[130px] pb-[5px] relative z-[2] transition-all duration-500 ease-in-out filter drop-shadow-lg group-hover:scale-110 group-hover:brightness-120 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] group-active:scale-95 group-active:transition-all group-active:duration-100 group-active:ease-in"
+                      className="z-100 w-[130px] h-[130px] pb-[5px] relative transition-all duration-500 ease-in-out filter drop-shadow-lg group-hover:scale-110 group-hover:brightness-120 group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] group-active:scale-95 group-active:transition-all group-active:duration-100 group-active:ease-in"
                       src="/play-icon-2.webp"
                       alt="Play video"
                       initial={{ scale: 0.9, opacity: 0.8 }}

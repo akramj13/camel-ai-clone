@@ -11,19 +11,9 @@ interface Logo {
 }
 
 function LogoCarousel() {
-  // Store current positions to resume animation from
-  const [position1, setPosition1] = useState(0);
-  const [position2, setPosition2] = useState(-2000);
-  const [hovering1, setHovering1] = useState(false);
-  const [hovering2, setHovering2] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
   const controls1 = useAnimationControls();
   const controls2 = useAnimationControls();
-
-  // Track animation with refs
-  const track1Ref = useRef<HTMLDivElement>(null);
-  const track2Ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Logo data for better organization
@@ -194,41 +184,38 @@ function LogoCarousel() {
   };
 
   // Animation functions
-  const startAnimation1 = useCallback(() => {
-    const endpoint = position1 <= -1000 ? 0 : -2000;
+  const startAnimations = useCallback(() => {
+    // First row - continuous left movement
     controls1.start({
-      x: [position1, endpoint],
+      x: [-2000, 0],
       transition: {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 60 * (Math.abs(endpoint - position1) / 2000),
+          duration: 60,
           ease: "linear",
         },
       },
     });
-  }, [position1, controls1]);
 
-  const startAnimation2 = useCallback(() => {
-    const endpoint = position2 >= -1000 ? -2000 : 0;
+    // Second row - continuous right movement
     controls2.start({
-      x: [position2, endpoint],
+      x: [0, -2000],
       transition: {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 60 * (Math.abs(endpoint - position2) / 2000),
+          duration: 60,
           ease: "linear",
         },
       },
     });
-  }, [position2, controls2]);
+  }, [controls1, controls2]);
 
   // Initialize animations and visibility observer
   useEffect(() => {
     const currentRef = containerRef.current;
-    startAnimation1();
-    startAnimation2();
+    startAnimations();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -248,7 +235,7 @@ function LogoCarousel() {
         observer.unobserve(currentRef);
       }
     };
-  }, [startAnimation1, startAnimation2]);
+  }, [startAnimations]);
 
   const renderLogo = (logo: Logo, index: number) => {
     const logoElement = (
@@ -271,9 +258,9 @@ function LogoCarousel() {
               y: {
                 repeat: Infinity,
                 repeatType: "mirror",
-                duration: 2 + Math.random() * 2, // Randomize duration for organic feel
+                duration: 2 + Math.random() * 2,
                 ease: "easeInOut",
-                delay: Math.random() * 2, // Randomize delay for varied movement
+                delay: Math.random() * 2,
               },
             },
           }}
@@ -293,45 +280,6 @@ function LogoCarousel() {
       );
     }
     return logoElement;
-  };
-
-  // Handle hover effects
-  const handleMouseEnter1 = () => {
-    // Stop animation and capture position from DOM
-    controls1.stop();
-    if (track1Ref.current) {
-      const transform = window.getComputedStyle(track1Ref.current).transform;
-      const matrix = new DOMMatrix(transform);
-      setPosition1(matrix.m41); // Get the x translation from the transform matrix
-    }
-    setHovering1(true);
-  };
-
-  const handleMouseLeave1 = () => {
-    if (hovering1) {
-      // Continue from current position
-      startAnimation1();
-      setHovering1(false);
-    }
-  };
-
-  const handleMouseEnter2 = () => {
-    // Stop animation and capture position from DOM
-    controls2.stop();
-    if (track2Ref.current) {
-      const transform = window.getComputedStyle(track2Ref.current).transform;
-      const matrix = new DOMMatrix(transform);
-      setPosition2(matrix.m41); // Get the x translation from the transform matrix
-    }
-    setHovering2(true);
-  };
-
-  const handleMouseLeave2 = () => {
-    if (hovering2) {
-      // Continue from current position
-      startAnimation2();
-      setHovering2(false);
-    }
   };
 
   return (
@@ -370,14 +318,9 @@ function LogoCarousel() {
 
       <div className="relative w-full mb-8">
         <div className="mask-fade-edges">
-          <div
-            className="logo-track flex"
-            onMouseEnter={handleMouseEnter1}
-            onMouseLeave={handleMouseLeave1}
-          >
+          <div className="logo-track flex">
             <motion.div
               className="logos-slide flex items-center"
-              ref={track1Ref}
               animate={controls1}
             >
               {firstRowLogos.map(renderLogo)}
@@ -389,14 +332,9 @@ function LogoCarousel() {
 
       <div className="relative w-full">
         <div className="mask-fade-edges">
-          <div
-            className="logo-track flex"
-            onMouseEnter={handleMouseEnter2}
-            onMouseLeave={handleMouseLeave2}
-          >
+          <div className="logo-track flex">
             <motion.div
               className="logos-slide flex items-center"
-              ref={track2Ref}
               animate={controls2}
             >
               {secondRowLogos.map(renderLogo)}
