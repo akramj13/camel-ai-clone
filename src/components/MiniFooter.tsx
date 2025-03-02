@@ -140,18 +140,6 @@ function MiniFooter() {
           </motion.div>
         </motion.div>
       </div>
-
-      <motion.div
-        className="w-full max-w-7xl mt-10 sm:mt-12 pt-4 border-t border-gray-800"
-        variants={itemVariants}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
-        <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
-          © 2024 camelQA (DBA camelAI) | All rights reserved
-        </p>
-      </motion.div>
     </motion.div>
   );
 }
